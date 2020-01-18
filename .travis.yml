@@ -1,0 +1,40 @@
+dist: trusty
+
+language: rust
+
+rust:
+  - stable
+  - beta
+  - nightly
+
+branches:
+  only: master
+
+before_cache: chmod -R a+r $HOME/.cargo
+
+cache: cargo
+
+before_install:
+  - set -e
+  - sudo apt update -q=2
+  - sudo apt install git protobuf-c-compiler cmake -yq
+  - sudo apt install libgcrypt20-dev libssl-dev libfuse-dev dnsutils cmake-curses-gui -y
+  - git clone git://github.com/dstaesse/ouroboros ouroboros-dev && cd ouroboros-dev && mkdir build && cd build && cmake .. && sudo make install && cd ../..
+  - rustup self update
+
+install:
+  - rustup update
+  - source ~/.cargo/env || true
+
+script:
+  - cargo build --verbose --all
+  - cargo test --verbose --all
+
+after_script: set +e
+
+jobs:
+  allow_failures:
+    - rust: nightly
+
+notifications:
+  email: false

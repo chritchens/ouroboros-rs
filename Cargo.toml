@@ -1,0 +1,17 @@
+[package]
+name = "ouroboros-rs"
+description = "An high-level wrapper to the Ouroboros protocol API"
+categories = ["network-programming"]
+keywords = ["networking", "ouroboros", "RINA", "web-protocol"]
+version = "0.1.0"
+authors = ["Christian Nyumbayire <chritchens@gmail.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/chritchens/ouroboros-rs"
+edition = "2018"
+
+[badges]
+travis-ci = { repository = "chritchens/ouroboros-rs", branch = "master" }
+
+[workspace]
+members = ["ouroboros", "ouroboros-sys"]
